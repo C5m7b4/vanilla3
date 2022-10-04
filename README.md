@@ -9,3 +9,8 @@ Add data and style
 ## branch 5
 
 Add state
+
+## branch 6
+
+npm install jest --save-dev
+npm install @babel/core @babel/plugin-transform-react-jsx
