@@ -1,5 +1,8 @@
 # Vanills JS
 
+![CI](https://github.com/C5m7b4/vanilla3/workflows/CI/badge.svg)
+![License](https://img.shields.io/github/license/C5m7b4/vanilla3)
+
 This is a simple website build with vanilla javascript.
 
 ## branch 4
