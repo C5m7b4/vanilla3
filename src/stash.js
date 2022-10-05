@@ -46,7 +46,7 @@ const data = [
   },
 ];
 
-const Box = (x) => ({
+export const Box = (x) => ({
   map: (f) => Box(f(x)),
   inspect: `Box${x}`,
   fold: (f) => f(x),
@@ -59,3 +59,16 @@ const findJeffry = (data) =>
     .fold((x) => x);
 
 console.log(findJeffry(data));
+
+const getFoodBetweenOneAndTwo = (data) =>
+  Box(data)
+    .map((x) => x.filter((f) => f.category === "beverages"))
+    .map((x) => x.filter((f) => f.price > 1.0))
+    .map((x) => x.filter((f) => f.price <= 2.0))
+    .map((x) => x.map((f) => f.price))
+    .map((x) => x.map((f) => parseFloat(f)))
+    .map((x) => x.reduce((a, c) => a + c))
+    .fold((x) => x);
+
+const r2 = getFoodBetweenOneAndTwo(data);
+console.log(r2);

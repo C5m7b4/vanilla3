@@ -15,9 +15,10 @@ Add state
 
 ## branch 6
 
+npm install eslint-webpack-plugin --save-dev
 npm install jest --save-dev
 npm install @babel/core @babel/plugin-transform-react-jsx
-npm install eslint-webpack-plugin --save-dev
+
 
 ```js
 devServer: {
