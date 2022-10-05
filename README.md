@@ -17,7 +17,9 @@ Add state
 
 npm install eslint-webpack-plugin --save-dev
 npm install jest --save-dev
-npm install @babel/core @babel/plugin-transform-react-jsx
+npm install @babel/core @babel
+
+plugin-transform-react-jsx
 
 
 ```js
