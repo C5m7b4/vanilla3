@@ -40,3 +40,7 @@ This should get eslint to display errors correctly.
 https://choosealicense.com/licenses/mit/
 
 https://shields.io/category/license
+
+## branch 10
+
+Add badges
