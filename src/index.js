@@ -92,3 +92,33 @@ const buildFilterBox = () => {
   newSelect.addEventListener("change", handleFilterChange);
 };
 buildFilterBox();
+
+const filterData = (property) => {
+  return function (value) {
+    return data.filter((i) => i[property] == value);
+  };
+};
+
+const curriedFilter = filterData("category");
+const fruits = curriedFilter("fruit");
+console.log(fruits);
+const beverages = curriedFilter("beverages");
+console.log(beverages);
+const candy = curriedFilter("candy");
+console.log(candy);
+
+const addSubtractMultiply = (a) => {
+  return function (b) {
+    return function (c) {
+      return function (d) {
+        return (a + b - c) * d;
+      };
+    };
+  };
+};
+
+const step1 = addSubtractMultiply(10);
+const step2 = step1(2);
+const step3 = step2(3);
+const result = step3(9);
+console.log(result);
