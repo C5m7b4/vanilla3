@@ -4,7 +4,7 @@ import { isValid } from "./utils";
 import "./styles.css";
 
 let filteredData = data;
-console.log(filteredData);
+// console.log(filteredData);
 
 const state = {
   items: data,
@@ -14,6 +14,63 @@ const state = {
     price: "",
     category: "",
   },
+};
+
+const getCheapestItem = () => {
+  return filteredData.reduce((acc, curr) => {
+    if (acc.price < curr.price) {
+      return acc;
+    } else {
+      return curr;
+    }
+  }, 9999);
+};
+
+const displayCheapestItem = () => {
+  const parent = document.getElementById("stats");
+  const divName = "cheapest-div";
+  const existing = document.getElementById(divName);
+  if (existing) {
+    parent.removeChild(existing);
+  }
+  const cheapest = getCheapestItem();
+  const div = document.createElement("div");
+  div.id = divName;
+  div.innerHTML = `The cheapest item is ${cheapest.name} and it is ${cheapest.price}`;
+  parent.appendChild(div);
+};
+
+const mostExpensive = () => {
+  return filteredData.reduce((acc, curr) => {
+    if (acc.price > curr.price) {
+      return acc;
+    } else {
+      return curr;
+    }
+  }, 0);
+};
+
+const displayMostExpensive = () => {
+  const parent = document.getElementById("stats");
+  const divName = "most-expensive";
+  const existing = document.getElementById(divName);
+  if (existing) {
+    parent.removeChild(existing);
+  }
+  const highest = mostExpensive();
+  const div = document.createElement("div");
+  div.id = divName;
+  div.innerHTML = `The most expensive item is ${highest.name} and it is ${highest.price}`;
+  parent.appendChild(div);
+};
+
+const buildDeleteLinks = () => {
+  const deletes = document.querySelectorAll("td[data-delete]");
+  for (let del of deletes) {
+    del.addEventListener("click", (e) => {
+      deleteItem(+e.currentTarget.id.substring(3));
+    });
+  }
 };
 
 const changeState = (element) => {
@@ -29,7 +86,7 @@ const changeState = (element) => {
     },
   };
 
-  console.log(result);
+  // console.log(result);
   return result;
 };
 
@@ -40,7 +97,6 @@ const setValue = (id, value) => {
 };
 
 const inputs = document.getElementsByTagName("input");
-console.log(inputs);
 for (let input of inputs) {
   input.addEventListener("change", changeState);
 }
@@ -50,11 +106,14 @@ const buildTable = () => {
   html +=
     "<tr><th>Products</th><th>Size</th><th>Price</th><th>Category</th><th>Delete</th></tr>";
   filteredData.map((item) => {
-    const { name, price, category, size } = item;
-    html += `<tr><td>${name}</td><td>${size}</td><td>${price}</td><td>${category}</td><td>Delete</td></tr>`;
+    const { name, price, id, category, size } = item;
+    html += `<tr><td>${name}</td><td>${size}</td><td>${price}</td><td>${category}</td><td id="tr-${id}" style="cursor:pointer;" data-delete="${id}">Delete</td></tr>`;
   });
   html += "</table";
   document.getElementById("items").innerHTML = html;
+  buildDeleteLinks();
+  displayCheapestItem();
+  displayMostExpensive();
 };
 
 buildTable();
@@ -93,32 +152,43 @@ const buildFilterBox = () => {
 };
 buildFilterBox();
 
-const filterData = (property) => {
-  return function (value) {
-    return data.filter((i) => i[property] == value);
-  };
+// const filterData = (property) => {
+//   return function (value) {
+//     return data.filter((i) => i[property] == value);
+//   };
+// };
+
+const deleteItem = (id) => {
+  const itemIndex = state.items.findIndex((i) => i.id === id);
+  if (itemIndex && itemIndex >= 0) {
+    const copiedItems = Array.from(state.items);
+    copiedItems.splice(itemIndex, 1);
+    state.items = copiedItems;
+    filteredData = copiedItems;
+    buildTable();
+  }
 };
 
-const curriedFilter = filterData("category");
-const fruits = curriedFilter("fruit");
-console.log(fruits);
-const beverages = curriedFilter("beverages");
-console.log(beverages);
-const candy = curriedFilter("candy");
-console.log(candy);
+// const curriedFilter = filterData("category");
+// const fruits = curriedFilter("fruit");
+// console.log(fruits);
+// const beverages = curriedFilter("beverages");
+// console.log(beverages);
+// const candy = curriedFilter("candy");
+// console.log(candy);
 
-const addSubtractMultiply = (a) => {
-  return function (b) {
-    return function (c) {
-      return function (d) {
-        return (a + b - c) * d;
-      };
-    };
-  };
-};
+// const addSubtractMultiply = (a) => {
+//   return function (b) {
+//     return function (c) {
+//       return function (d) {
+//         return (a + b - c) * d;
+//       };
+//     };
+//   };
+// };
 
-const step1 = addSubtractMultiply(10);
-const step2 = step1(2);
-const step3 = step2(3);
-const result = step3(9);
-console.log(result);
+// const step1 = addSubtractMultiply(10);
+// const step2 = step1(2);
+// const step3 = step2(3);
+// const result = step3(9);
+// console.log(result);
