@@ -1,6 +1,6 @@
 # Vanills JS
 
-![CI](https://github.com/C5m7b4/vanilla3/workflows/CI/badge.svg)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/C5m7b4/vanilla3/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/C5m7b4/vanilla3/tree/master)
 ![GitHub](https://img.shields.io/github/license/C5m7b4/vanilla3?style=plastic)
 
 This is a simple website build with vanilla javascript.
@@ -52,3 +52,6 @@ add our table
 ## branch 11
 
 add filter box
+
+## branch 14
+add formatMoney function
