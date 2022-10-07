@@ -54,4 +54,9 @@ add our table
 add filter box
 
 ## branch 14
+
 add formatMoney function
+
+## branch 16
+
+Add sorting
